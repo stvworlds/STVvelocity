@@ -1,0 +1,11 @@
+{
+  "id": "stvvelocity",
+  "name": "STVvelocity",
+  "version": "${version}",
+  "main": "win.stvworlds.stvvelocity.STVvelocity",
+  "description": "Plugins for Stevious velocity",
+  "url": "https://stvworlds.win",
+  "authors": [
+    "Maksim6opka"
+  ]
+}

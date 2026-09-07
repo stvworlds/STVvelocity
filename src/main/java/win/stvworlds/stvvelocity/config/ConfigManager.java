@@ -61,4 +61,18 @@ public class ConfigManager {
             return List.of();
         }
     }
+
+    public List<String> getWhitelistProtectedServers() {
+        if (root == null) {
+            return List.of();
+        }
+        try {
+            List<String> servers = root.node("whitelist-protected", "servers").getList(String.class);
+            return servers != null ? List.copyOf(servers) : List.of();
+        } catch (Exception e) {
+            logger.warn("Failed to read gwhitelist-protected.servers from config", e);
+            return List.of();
+        }
+
+    }
 }

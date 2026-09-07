@@ -9,6 +9,7 @@ import com.velocitypowered.api.proxy.server.RegisteredServer;
 import org.slf4j.Logger;
 import win.stvworlds.stvvelocity.STVvelocity;
 import win.stvworlds.stvvelocity.config.ConfigManager;
+import win.stvworlds.stvvelocity.misc.Utils;
 
 import java.util.List;
 import java.util.Optional;
@@ -61,7 +62,7 @@ public final class GlobalChatListener {
         }
 
         // Source must be part of the global chat mesh to participate.
-        if (!containsIgnoreCase(configuredServers, sourceName)) {
+        if (!Utils.containsIgnoreCase(configuredServers, sourceName)) {
             logger.debug(
                     "Source server {} is not in global-messaging.servers; dropping message",
                     sourceName
@@ -102,12 +103,5 @@ public final class GlobalChatListener {
         }
     }
 
-    private static boolean containsIgnoreCase(List<String> names, String value) {
-        for (String name : names) {
-            if (name != null && name.equalsIgnoreCase(value)) {
-                return true;
-            }
-        }
-        return false;
-    }
+
 }

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 public class ConfigManager {
 
@@ -43,5 +44,21 @@ public class ConfigManager {
 
     public CommentedConfigurationNode getRoot() {
         return root;
+    }
+
+    /**
+     * Server names that participate in global chat routing (Velocity RegisteredServer names).
+     */
+    public List<String> getGlobalChatServers() {
+        if (root == null) {
+            return List.of();
+        }
+        try {
+            List<String> servers = root.node("global-messaging", "servers").getList(String.class);
+            return servers != null ? List.copyOf(servers) : List.of();
+        } catch (Exception e) {
+            logger.warn("Failed to read global-messaging.servers from config", e);
+            return List.of();
+        }
     }
 }

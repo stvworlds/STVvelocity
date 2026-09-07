@@ -1,6 +1,7 @@
 plugins {
     id("java-library")
     id("xyz.jpenilla.run-velocity") version "3.1.0"
+    id("com.gradleup.shadow") version "9.6.1"
 }
 
 repositories {
@@ -11,6 +12,7 @@ repositories {
 dependencies {
     compileOnly("com.velocitypowered:velocity-api:4.1.1-SNAPSHOT")
     annotationProcessor("com.velocitypowered:velocity-api:4.1.1-SNAPSHOT")
+    implementation("org.spongepowered:configurate-hocon:4.1.2")
 }
 
 java {
@@ -18,6 +20,12 @@ java {
 }
 
 tasks {
+    shadowJar {
+        relocate("org.spongepowered.configurate", "win.stvworlds.stvvelocity.libs.configurate")
+        relocate("io.leangen.geantyref", "win.stvworlds.stvvelocity.libs.geantyref")
+        relocate("com.typesafe.config", "win.stvworlds.stvvelocity.libs.typesafe")
+    }
+
     runVelocity {
         // Configure the Velocity version for our task.
         // This is the only required configuration besides applying the plugin.
